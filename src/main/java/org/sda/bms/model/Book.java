@@ -15,7 +15,7 @@ public class Book {
     @Column(name = "description")
     private String description;
     @ManyToOne
-    @JoinColumn(name = "author")
+    @JoinColumn(name = "author_id")
     private Author author;
     @OneToMany(mappedBy = "book")
     private List<Review> reviews;

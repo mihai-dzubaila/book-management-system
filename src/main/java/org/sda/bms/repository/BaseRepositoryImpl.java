@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.sda.bms.repository.exception.EntityCreationFailedException;
-import org.sda.bms.repository.exception.EntityDeleteFailedException;
+import org.sda.bms.repository.exception.EntityDeletionFailedException;
 import org.sda.bms.repository.exception.EntityFetchingFailedException;
 import org.sda.bms.repository.exception.EntityUpdateFailedException;
 import org.sda.bms.utils.SessionManager;
@@ -22,17 +22,18 @@ public class BaseRepositoryImpl<T> implements BaseRepository<T> {
     @Override
     public void create(T entity) {
         Transaction transaction = null;
-        try (Session session = SessionManager.getSessionFactory().openSession();) {
+        try (Session session = SessionManager.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+
             session.save(entity);
+
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             throw new EntityCreationFailedException(
-                    "Entity Creation Failed ! ",
-                    e
+                    "Entity creation failed!", e
             );
         }
     }
@@ -40,17 +41,18 @@ public class BaseRepositoryImpl<T> implements BaseRepository<T> {
     @Override
     public void update(T entity) {
         Transaction transaction = null;
-        try (Session session = SessionManager.getSessionFactory().openSession();) {
+        try (Session session = SessionManager.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+
             session.update(entity);
+
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
             throw new EntityUpdateFailedException(
-                    "Entity Update Failed ! ",
-                    e
+                    "Entity update failed!", e
             );
         }
     }
@@ -58,17 +60,18 @@ public class BaseRepositoryImpl<T> implements BaseRepository<T> {
     @Override
     public void delete(T entity) {
         Transaction transaction = null;
-        try (Session session = SessionManager.getSessionFactory().openSession();) {
+        try (Session session = SessionManager.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
+
             session.delete(entity);
+
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new EntityDeleteFailedException(
-                    "Entity Delete Failed ! ",
-                    e
+            throw new EntityDeletionFailedException(
+                    "Entity deletion failed!", e
             );
         }
     }
@@ -79,10 +82,9 @@ public class BaseRepositoryImpl<T> implements BaseRepository<T> {
             return Optional.ofNullable(session.find(entityClass, id));
         } catch (Exception e) {
             throw new EntityFetchingFailedException(
-                    "Failed to load entity by id ", e
+                    "Failed to load entity by id", e
             );
         }
-
     }
 
     @Override
@@ -94,9 +96,8 @@ public class BaseRepositoryImpl<T> implements BaseRepository<T> {
             return query.list();
         } catch (Exception e) {
             throw new EntityFetchingFailedException(
-                    "Failed to load all entities ", e
+                    "Failed to load all entities", e
             );
         }
-
     }
 }

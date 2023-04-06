@@ -7,7 +7,8 @@ public enum UserOption {
     UPDATE_AUTHOR(2, "Update Author"),
     DELETE_AUTHOR(3, "Delete Author"),
     EXIT(99, "Exit"),
-    UNKNOWN(99999, "Unknown");
+    UNKNOWN(9999, "Unknown");
+
     private final int option;
     private final String displayName;
 
@@ -17,7 +18,7 @@ public enum UserOption {
     }
 
     public static void printAllOptions() {
-        System.out.println("------------------------------------------------------------------------------------------------------");
+        System.out.println("-------------------------------");
         for (UserOption userOption : values()) {
             if (userOption != UNKNOWN) {
                 System.out.println(userOption.displayName + " -> " + userOption.option);
@@ -34,5 +35,5 @@ public enum UserOption {
         return Optional.empty();
     }
 
-}
 
+}

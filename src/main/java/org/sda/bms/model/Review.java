@@ -3,19 +3,18 @@ package org.sda.bms.model;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "review")
+@Table(name = "review")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Integer id;
-    @Column(name="score")
+    @Column(name = "score")
     private Integer score;
-    @Column(name="comment")
+    @Column(name = "comment")
     private String comment;
-
     @ManyToOne
-    @JoinColumn(name ="book")
+    @JoinColumn(name = "book_id")
     private Book book;
 
     public Review() {

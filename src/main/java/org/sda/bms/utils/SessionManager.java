@@ -6,12 +6,11 @@ import org.sda.bms.model.Author;
 import org.sda.bms.model.Book;
 import org.sda.bms.model.Review;
 
-public class SessionManager extends AbstractSessionManager{
-
+public class SessionManager extends AbstractSessionManager {
     private static final SessionManager INSTANCE = new SessionManager();
 
     private SessionManager() {
-
+        // hide the default constructor
     }
 
     public static SessionFactory getSessionFactory() {
@@ -24,7 +23,7 @@ public class SessionManager extends AbstractSessionManager{
 
     @Override
     protected void setAnnotatedClasses(Configuration configuration) {
-        //do not forget to add the model here !!!!!!
+        // do not forget to add the model here
         configuration.addAnnotatedClass(Author.class);
         configuration.addAnnotatedClass(Book.class);
         configuration.addAnnotatedClass(Review.class);

@@ -1,12 +1,10 @@
 package org.sda.bms.model;
 
-import org.jboss.logging.MessageLogger;
-
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Author")
+@Table(name = "author")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,4 +66,3 @@ public class Author {
                 '}';
     }
 }
-
