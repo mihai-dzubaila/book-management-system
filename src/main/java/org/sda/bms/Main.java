@@ -60,7 +60,7 @@ public class Main {
                     System.out.println("Not Implemented");
                     break;
                 case VIEW_ALL_BOOK:
-                    System.out.println("Not Implemented");
+                    bookController.displayAll();
                     break;
                 case UNKNOWN:
                     System.out.println("Please insert a valid option!!!");

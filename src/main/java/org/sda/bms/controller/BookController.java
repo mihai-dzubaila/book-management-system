@@ -1,11 +1,14 @@
 package org.sda.bms.controller;
 
+import org.sda.bms.model.Author;
+import org.sda.bms.model.Book;
 import org.sda.bms.repository.exception.EntityCreationFailedException;
 import org.sda.bms.repository.exception.EntityFetchingFailedException;
 import org.sda.bms.service.AuthorService;
 import org.sda.bms.service.BookService;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 public class BookController {
@@ -40,5 +43,23 @@ public class BookController {
         } catch (Exception e) {
             System.err.println("Internal server error. Please contact your administrator.");
         }
+    }
+
+    public void displayAll() {
+        try {
+            List<Book> existingBooks = bookService.findAll();
+            if (existingBooks.isEmpty()) {
+                System.out.println("No books found in the system");
+            } else {
+                for (Book book : existingBooks) {
+                    System.out.println("ID: " + book.getId() + " Title: " + book.getTitle() + " Description: " + book.getDescription() + " Author: " + book.getAuthor().getFirstName() + " " + book.getAuthor().getLastName());
+                }
+            }
+        } catch (EntityFetchingFailedException e) {
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Internal server error. Please contact your administrator.");
+        }
+
     }
 }
