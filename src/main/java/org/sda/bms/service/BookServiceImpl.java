@@ -40,7 +40,7 @@ public class BookServiceImpl implements BookService {
                     "Author with provided id was not found in the system");
         }
         Author author = authorOptional.get();
-        Book book = new Book(title,description);
+        Book book = new Book(title, description);
         book.setAuthor(author);
         bookRepository.create(book);
     }
@@ -58,6 +58,21 @@ public class BookServiceImpl implements BookService {
         }
         return bookRepository.findById(id);
 
+    }
+
+    @Override
+    public void delete(int id) {
+
+        if (id <= 0) {
+            throw new IllegalArgumentException(
+                    "Provided ID is negative or 0. Provide a valid value.");
+        }
+        Optional<Book> bookOptional = bookRepository.findById(id);
+        if (bookOptional.isEmpty()) {
+            throw new EntityNotFoundException(
+                    "Author with provided id was not found in the system");
+        }
+        bookRepository.delete(bookOptional.get());
     }
 
 

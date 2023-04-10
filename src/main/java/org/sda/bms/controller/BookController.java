@@ -3,6 +3,7 @@ package org.sda.bms.controller;
 import org.sda.bms.model.Author;
 import org.sda.bms.model.Book;
 import org.sda.bms.repository.exception.EntityCreationFailedException;
+import org.sda.bms.repository.exception.EntityDeleteFailedException;
 import org.sda.bms.repository.exception.EntityFetchingFailedException;
 import org.sda.bms.service.AuthorService;
 import org.sda.bms.service.BookService;
@@ -75,7 +76,7 @@ public class BookController {
                 Book book = optionalBook.get();
                 System.out.println("ID:                " + book.getId());
                 System.out.println("Title:             " + book.getTitle());
-                System.out.println("Book Description:  " + book.getDescription());
+                System.out.println("Book Description:  " + formatBookDescription(book.getDescription()));
                 System.out.println("Author ID:         " + book.getAuthor().getId());
                 System.out.println("Author First Name: " + book.getAuthor().getLastName());
                 System.out.println("Author Last Name:  " + book.getAuthor().getFirstName());
@@ -100,5 +101,25 @@ public class BookController {
             result = result + "\s" + words[index];
         }
         return result;
+    }
+    public void deleteByID() {
+        try {
+            System.out.println("Please provide the Book id");
+            int bookId = Integer.parseInt(scanner.nextLine().trim());
+            bookService.delete(bookId);
+            System.out.println("Book successfully deleted");
+        } catch (NumberFormatException e) {
+            System.err.println("Provided ID is not a number. Please enter a numeric value");
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
+        } catch (EntityFetchingFailedException e) {
+            System.err.println(e.getMessage());
+        } catch (EntityDeleteFailedException e) {
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Internal server error. Please contact your administrator.");
+        }
     }
 }

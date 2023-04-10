@@ -57,7 +57,7 @@ public class Main {
                     System.out.println("Not Implemented");
                     break;
                 case DELETE_BOOK:
-                    System.out.println("Not Implemented");
+                    bookController.deleteByID();
                     break;
                 case VIEW_ALL_BOOK:
                     bookController.displayAll();
