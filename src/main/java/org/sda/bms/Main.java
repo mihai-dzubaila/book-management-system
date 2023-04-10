@@ -62,6 +62,9 @@ public class Main {
                 case VIEW_ALL_BOOK:
                     bookController.displayAll();
                     break;
+                case VIEW_BOOK_BY_ID:
+                    bookController.displayById();
+                    break;
                 case UNKNOWN:
                     System.out.println("Please insert a valid option!!!");
                     break;
