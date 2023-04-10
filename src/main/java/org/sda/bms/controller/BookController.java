@@ -5,6 +5,7 @@ import org.sda.bms.model.Book;
 import org.sda.bms.repository.exception.EntityCreationFailedException;
 import org.sda.bms.repository.exception.EntityDeleteFailedException;
 import org.sda.bms.repository.exception.EntityFetchingFailedException;
+import org.sda.bms.repository.exception.EntityUpdateFailedException;
 import org.sda.bms.service.AuthorService;
 import org.sda.bms.service.BookService;
 
@@ -117,6 +118,30 @@ public class BookController {
         } catch (EntityFetchingFailedException e) {
             System.err.println(e.getMessage());
         } catch (EntityDeleteFailedException e) {
+            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Internal server error. Please contact your administrator.");
+        }
+    }
+    public void updateByID() {
+        try {
+            System.out.println("Please provide the book id");
+            int authorId = Integer.parseInt(scanner.nextLine().trim());
+            System.out.println("Please provide the title:");
+            String firstName = scanner.nextLine().trim();
+            System.out.println("Please provide description:");
+            String lastName = scanner.nextLine().trim();
+            bookService.updateById(authorId, firstName, lastName);
+            System.out.println("Book Successfully updated");
+        } catch (NumberFormatException e) {
+            System.err.println("Provided ID is not a number. Please enter a numeric value");
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        } catch (EntityNotFoundException e) {
+            System.err.println(e.getMessage());
+        } catch (EntityFetchingFailedException e) {
+            System.err.println(e.getMessage());
+        } catch (EntityUpdateFailedException e) {
             System.err.println(e.getMessage());
         } catch (Exception e) {
             System.err.println("Internal server error. Please contact your administrator.");

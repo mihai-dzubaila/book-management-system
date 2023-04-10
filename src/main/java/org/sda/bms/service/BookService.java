@@ -13,6 +13,6 @@ public interface BookService {
 
     Optional<Book> findById(int id);
     void delete (int id);
-
+    void updateById(int id, String title, String description);
 
 }

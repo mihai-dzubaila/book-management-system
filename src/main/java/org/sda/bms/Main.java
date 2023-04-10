@@ -54,7 +54,7 @@ public class Main {
                     bookController.create();
                     break;
                 case UPDATE_BOOK:
-                    System.out.println("Not Implemented");
+                    bookController.updateByID();
                     break;
                 case DELETE_BOOK:
                     bookController.deleteByID();
