@@ -1,9 +1,12 @@
 package org.sda.bms;
 
 import org.sda.bms.controller.AuthorController;
+import org.sda.bms.controller.BookController;
 import org.sda.bms.controller.UserOption;
 import org.sda.bms.repository.AuthorRepositoryImpl;
+import org.sda.bms.repository.BookRepositoryImpl;
 import org.sda.bms.service.AuthorServiceImpl;
+import org.sda.bms.service.BookServiceImpl;
 import org.sda.bms.utils.SessionManager;
 
 import java.util.Scanner;
@@ -18,7 +21,10 @@ public class Main {
                 new AuthorServiceImpl(new AuthorRepositoryImpl()),
                 scanner
         );
-
+        BookController bookController = new BookController(
+                new BookServiceImpl(new BookRepositoryImpl(),new AuthorRepositoryImpl()),
+                scanner
+        );
         UserOption userOption = UserOption.UNKNOWN;
         while (userOption != UserOption.EXIT) {
             UserOption.printAllOptions();
@@ -43,6 +49,18 @@ public class Main {
                     break;
                 case VIEW_ALL_AUTHORS:
                     authorController.displayAll();
+                    break;
+                case CREATE_BOOK:
+                    bookController.create();
+                    break;
+                case UPDATE_BOOK:
+                    System.out.println("Not Implemented");
+                    break;
+                case DELETE_BOOK:
+                    System.out.println("Not Implemented");
+                    break;
+                case VIEW_ALL_BOOK:
+                    System.out.println("Not Implemented");
                     break;
                 case UNKNOWN:
                     System.out.println("Please insert a valid option!!!");
